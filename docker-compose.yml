@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  api:
+    build: .
+    command: >
+      sh -c "pipenv run python manage.py runserver 0.0.0.0:8000"
+    container_name: recipes-api
+    ports:
+      - "8000:8000"
+    image: recipes-api:1.0
+    networks:
+      recipes-api-network:
+        aliases:
+          - api
+
+networks:
+  recipes-api-network:
+    name: recipes-api-network
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 148.10.10.0/24
