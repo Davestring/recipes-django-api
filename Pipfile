@@ -11,7 +11,7 @@ pyflakes = "*"
 bandit = "*"
 pydocstyle = "*"
 pre-commit = "*"
-black = "~=19.3b0"
+black = "==19.3b0"
 
 [packages]
 django = "~=2.2.0"
