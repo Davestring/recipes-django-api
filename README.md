@@ -10,7 +10,8 @@
 
 ## Dependencies
 
-![Python 3.8](https://img.shields.io/badge/Python-3.8-blue.svg)
+![Docker 20.10.2](https://img.shields.io/badge/Docker-20.10.2-blue.svg)
+![Python 3.8](https://img.shields.io/badge/Python-3.8-yellow.svg)
 ![Django 2.2.0](https://img.shields.io/badge/Django-2.2.0-black.svg)
 ![Django REST Framework 3.10.0](https://img.shields.io/badge/DjangoRestFramework-3.10.0-green.svg)
 ![PostgreSQL 13.1](https://img.shields.io/badge/PostgreSQL-13.1-white.svg)
