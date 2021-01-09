@@ -41,7 +41,7 @@ pipenv --venv
 This project uses [pipenv](https://pipenv-fork.readthedocs.io/en/latest/) to manage the project dependencies and environment, after installing the Django dependency (`pipenv install Django~=2.2.0`), we can easily create a Django project executing the following command:
 
 ```bash
-pipenv run django-admin startproject recipesapi .
+pipenv run django-admin startproject app .
 ```
 
 ### Git Flow
