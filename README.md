@@ -58,7 +58,7 @@ For this project from the `main` branch we will take the production build and fr
 For developing a new _feature_ we need to run the following command:
 
 ```bash
-git flow featur start my-feature
+git flow feature start my-feature
 ```
 
 Once all the changes are done we should squash all out commits and merge with the `develop`branch:
