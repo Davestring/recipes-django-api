@@ -6,13 +6,39 @@ services:
     command: >
       sh -c "pipenv run python manage.py runserver 0.0.0.0:8000"
     container_name: recipes-api
+    depends_on:
+      - db
     ports:
-      - "8000:8000"
+      - "22000:8000"
     image: recipes-api:1.0
     networks:
       recipes-api-network:
         aliases:
           - api
+
+  db:
+    build: ./db
+    container_name: recipes-db
+    image: recipes-db:1.0
+    env_file:
+      - ./db/.env
+    networks:
+      recipes-api-network:
+        aliases:
+          - db
+    ports:
+      - "20000:3306"
+      - "20001:33060"
+    volumes:
+      - type: volume
+        source: recipes-db-volume
+        target: /data/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      start_period: 10s
+      timeout: 4s
+      retries: 3
 
 networks:
   recipes-api-network:
@@ -21,3 +47,7 @@ networks:
     ipam:
       config:
         - subnet: 148.10.10.0/24
+
+volumes:
+  recipes-db-volume:
+    name: recipes-db-volume
