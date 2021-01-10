@@ -45,6 +45,16 @@
                 "showmigrations"
             ],
             "django": true
-        }
+        },{
+            "name": "API: Run Tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "preLaunchTask": "Set_DOTENV",
+            "args": [
+                "test"
+            ],
+            "django": true
+        },
     ]
 }
