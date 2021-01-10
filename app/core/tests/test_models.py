@@ -22,7 +22,8 @@ class TestCustomUser(TestCase):
     def test_create_custom_user_success(self):
         """Create a new user success test.
 
-        Will create a new user using the `get_user_model` function.
+        Will create a new user using the `get_user_model` and
+        `create_user` function.
 
         Raises
         ------
@@ -31,7 +32,7 @@ class TestCustomUser(TestCase):
 
         """
         email = self.faker.email()
-        password = "fakepassword"
+        password = self.faker.password()
 
         user = get_user_model().objects.create_user(
             email=email, password=password
@@ -39,3 +40,24 @@ class TestCustomUser(TestCase):
 
         self.assertEqual(user.email, email)
         self.assertTrue(user.check_password(password))
+
+    def test_create_superuser_success(self):
+        """Create a new superuser success test.
+
+        Will create a new superuser using the `get_user_model` and the
+        `create_superuser` functions.
+
+        Raises
+        ------
+        Exception
+            If user email or password doesn't match with the created superuser.
+
+        """
+        email = self.faker.email()
+        password = self.faker.password()
+
+        user = get_user_model().objects.create_superuser(
+            email=email, password=password
+        )
+
+        self.assertTrue(user.is_superuser)

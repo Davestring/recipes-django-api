@@ -1,4 +1,4 @@
-"""Core model modules."""
+"""Core models module."""
 
 from django.contrib.auth.models import (
     AbstractBaseUser,
@@ -30,12 +30,32 @@ class CustomUserManager(BaseUserManager):
         email : str
             User email address.
         password : str
-            User custom password
+            User custom password.
         kwargs : dict
+            User custom parameters.
 
         """
         user = self.model(email=email, **kwargs)
         user.set_password(password)
+        user.save(using=self._db)
+
+        return user
+
+    def create_superuser(self, email: str, password: str):
+        """Create Superuser.
+
+        Create a new superuser and persists it into the database.
+
+        Parameters
+        ----------
+        email : str
+            Superuser email address.
+        password : str
+            Superuser custom password.
+
+        """
+        user = self.create_user(email, password)
+        user.is_superuser = True
         user.save(using=self._db)
 
         return user
