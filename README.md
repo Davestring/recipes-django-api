@@ -36,6 +36,14 @@ pipenv install --dev
 pipenv --venv
 ```
 ## Appendices
+
+### Database
+
+The Docker configuration for the MySQL service is located in the [db](./db) folder, once you install the project dependencies, the prompt may trigger an error coming from the `mysqlclient` package, make shure to make the proper configuration as the [mysqlclient](https://pypi.org/project/mysqlclient/) docs point out, for example, for MacOS before runing `pipenv install`, run:
+
+```bash
+brew install mysql
+```
 ### Creating the Project
 
 This project uses [pipenv](https://pipenv-fork.readthedocs.io/en/latest/) to manage the project dependencies and environment, after installing the Django dependency (`pipenv install Django~=2.2.0`), we can easily create a Django project executing the following command:

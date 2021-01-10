@@ -6,6 +6,8 @@ services:
     command: >
       sh -c "pipenv run python manage.py runserver 0.0.0.0:8000"
     container_name: recipes-api
+    depends_on:
+      - db
     ports:
       - "22000:8000"
     image: recipes-api:1.0
