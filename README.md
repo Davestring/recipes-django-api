@@ -14,7 +14,7 @@
 ![Python 3.8](https://img.shields.io/badge/Python-3.8-yellow.svg)
 ![Django 2.2.0](https://img.shields.io/badge/Django-2.2.0-black.svg)
 ![Django REST Framework 3.10.0](https://img.shields.io/badge/DjangoRestFramework-3.10.0-green.svg)
-![PostgreSQL 13.1](https://img.shields.io/badge/PostgreSQL-13.1-white.svg)
+![MySQL 8.0](https://img.shields.io/badge/MySQL-8.0-white.svg)
 
 ## Content
 ### Installing Dependencies
@@ -35,15 +35,36 @@ pipenv install --dev
 ```bash
 pipenv --venv
 ```
-## Appendices
-### Creating the Project
 
-This project uses [pipenv](https://pipenv-fork.readthedocs.io/en/latest/) to manage the project dependencies and environment, after installing the Django dependency (`pipenv install Django~=2.2.0`), we can easily create a Django project executing the following command:
+### Executing Migrations
+
+In the [.vscode](./.vscode) folder there is a [launch](./.vscode/launch.json) file so in the VSCode Debugger we can easily execute the `API: Make Migrations` and the `API: Migrate` tasks in that order. To execute the migrations manually you can use the following commands:
 
 ```bash
-pipenv run django-admin startproject app .
+pipenv run python manage.py makemigrations
 ```
 
+```bash
+pipenv run python manage.py migrate
+```
+## Appendices
+
+### Database
+
+The Docker configuration for the MySQL service is located in the [db](./db) folder, once you install the project dependencies, the prompt may trigger an error coming from the `mysqlclient` package, make shure to make the proper configuration as the [mysqlclient](https://pypi.org/project/mysqlclient/) docs point out, for example, for MacOS before runing `pipenv install`, run:
+
+```bash
+brew install mysql
+```
+### Pre Commit
+
+The [pre-commit](https://pre-commit.com/) configuration can be found in `.pre-commit-config.yaml` file. When cloning this repository you should execute the following command in order to set up the git hook scripts:
+
+```bash
+pipenv run pre-commit install
+```
+
+Now, `pre-commit` will run automatically on `git commit`.
 ### Git Flow
 
 This project uses [git-flow](http://danielkummer.github.io/git-flow-cheatsheet/) guideline to perform high-level repository operations. Once you clone this repository make shure to execute the following command to start using `git-flow` and continue using the project guideline.
@@ -91,12 +112,31 @@ git push --tags
 
 This will help us to keep out project stable and healthy.
 
-### Pre Commit
+### Django Utils
 
-The [pre-commit](https://pre-commit.com/) configuration can be found in `.pre-commit-config.yaml` file. When cloning this repository you should execute the following command in order to set up the git hook scripts:
+#### Creating a Project
+
+This project uses [pipenv](https://pipenv-fork.readthedocs.io/en/latest/) to manage the project dependencies and environment, after installing the Django dependency (`pipenv install Django~=2.2.0`), we can easily create a Django project executing the following command:
 
 ```bash
-pipenv run pre-commit install
+pipenv run django-admin startproject app .
 ```
 
-Now, `pre-commit` will run automatically on `git commit`.
+#### Creating an Application
+
+As we are creating all our applications inside the [app](./app) folder we can create a new app using the following commands:
+
+```bash
+cd app
+pipenv run python ./../manage.py startapp core
+```
+
+#### Creating a Superuser
+
+After launching the project we can easily create a superuser executing the following command:
+
+```bash
+pipenv run python manage.py createsuperuser
+```
+
+After that, enter the email and password of the superuser in the command line.

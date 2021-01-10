@@ -56,6 +56,7 @@ class CustomUserManager(BaseUserManager):
         """
         user = self.create_user(email, password)
         user.is_superuser = True
+        user.is_staff = True
         user.save(using=self._db)
 
         return user
@@ -77,6 +78,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         User lastname.
     is_active : bool
         True if the user is active, otherwise False.
+    is_staff : bool
+        True if the user is allowed to have access to the admin site.
     objects : CustomUserManager
         Utility methods.
     USERNAME_FIELD : str
@@ -89,6 +92,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 

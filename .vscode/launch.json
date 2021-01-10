@@ -9,7 +9,6 @@
             "preLaunchTask": "Set_DOTENV",
             "args": [
                 "runserver",
-                "--noreload",
                 "--nothreading"
             ],
             "django": true
